@@ -10,8 +10,10 @@ pipeline {
 
         stage('Run') {
             steps {
-                sh 'docker rm -f static-site || true'
-                sh 'docker run -d -p 8081:80 static-site'
+                sh '''
+                    docker rm -f static-site || true
+                    docker run -d -p 8081:80 --name static-site static-site
+                '''
             }
         }
     }
